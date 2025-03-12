@@ -1,0 +1,21 @@
+{% extends 'cafe_orders_app/base.html' %}
+
+{% block content %}
+<h1>Изменить статус заказа №{{ order.id }}</h1>
+
+<form method="POST" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="status" class="form-label">Статус заказа</label>
+        <select class="form-select" name="status" id="status" required>
+            <option value="В ожидании" {% if order.status == 'В ожидании' %}selected{% endif %}>В ожидании</option>
+            <option value="Готово" {% if order.status == 'Готово' %}selected{% endif %}>Готово</option>
+            <option value="Оплачено" {% if order.status == 'Оплачено' %}selected{% endif %}>Оплачено</option>
+        </select>
+        <div class="invalid-feedback">
+            Пожалуйста, выберите статус заказа.
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Сохранить изменения</button>
+</form>
+{% endblock %}

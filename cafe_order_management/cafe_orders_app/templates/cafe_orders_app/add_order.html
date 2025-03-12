@@ -1,0 +1,24 @@
+{% extends 'cafe_orders_app/base.html' %}
+
+{% block content %}
+<h1>Добавить новый заказ</h1>
+
+<form method="POST" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="table_number" class="form-label">Номер стола</label>
+        {{ form.table_number }}
+        {% if form.table_number.errors %}
+            <div class="invalid-feedback">{{ form.table_number.errors }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="dishes" class="form-label">Выберите блюда</label>
+        {{ form.dishes }}
+        {% if form.dishes.errors %}
+            <div class="invalid-feedback">{{ form.dishes.errors }}</div>
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-success">Добавить заказ</button>
+</form>
+{% endblock %}

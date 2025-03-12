@@ -1,0 +1,135 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Светло-серый фон */
+    color: #343a40; /* Темно-серый текст */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #007bff; /* Синий цвет заголовков */
+}
+
+a {
+    text-decoration: none;
+    color: #007bff; /* Синий цвет ссылок */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Кнопки */
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn-success {
+    background-color: #28a745; /* Зеленая кнопка */
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Красная кнопка */
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Таблицы */
+.table {
+    margin-top: 20px;
+}
+
+.table thead th {
+    background-color: #007bff; /* Синий фон заголовков таблицы */
+    color: white; /* Белый текст */
+    text-align: center;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1; /* Подсветка строки при наведении */
+}
+
+/* Вкладки */
+.tabs-container {
+    margin-top: 20px;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    background-color: #e9ecef; /* Серый фон неактивных вкладок */
+    border: 1px solid #ced4da;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab.active {
+    background-color: #007bff; /* Синий фон активной вкладки */
+    color: white;
+    border-bottom: none;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 0 0 5px 5px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Формы */
+form {
+    margin-top: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.invalid-feedback {
+    color: #dc3545; /* Красный цвет сообщений об ошибках */
+    font-size: 0.875em;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab {
+        border-radius: 5px;
+    }
+}

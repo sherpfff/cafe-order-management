@@ -1,0 +1,22 @@
+[
+    {
+        "name": "чай",
+        "price": 10.0,
+        "available": true
+    },
+    {
+        "name": "кофе",
+        "price": 20.0,
+        "available": true
+    },
+    {
+        "name": "пица",
+        "price": 77.0,
+        "available": true
+    },
+    {
+        "name": "клецка",
+        "price": 15.0,
+        "available": true
+    }
+]

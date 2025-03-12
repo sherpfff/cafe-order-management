@@ -1,0 +1,77 @@
+{% extends 'cafe_orders_app/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Общая стоимость заказов по столам</h1>
+
+    <!-- Таблица с общей стоимостью -->
+    <div class="table-responsive mb-4">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Стол</th>
+                    <th>Общая стоимость</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for table in table_totals %}
+                <tr>
+                    <td>{{ table.table_number }}</td>
+                    <td>{{ table.total_price|floatformat:2 }} руб.</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2" class="text-center">Нет данных о заказах</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Детали заказов -->
+    <h2>Детали заказов</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Стол</th>
+                    <th>Блюда</th>
+                    <th>Стоимость</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.table_number }}</td>
+                    <td>
+                        {% for dish in order.dishes.all %}
+                            {{ dish.name }} ({{ dish.price|floatformat:2 }} руб.)<br>
+                        {% empty %}
+                            Нет блюд
+                        {% endfor %}
+                    </td>
+                    <td>{{ order.total_price|floatformat:2 }} руб.</td>
+                    <td>
+                        <span class="badge 
+                            {% if order.status == 'В ожидании' %}bg-warning
+                            {% elif order.status == 'Готово' %}bg-success
+                            {% elif order.status == 'Оплачено' %}bg-info
+                            {% else %}bg-secondary
+                            {% endif %}">
+                            {{ order.status|capfirst }}
+                        </span>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">Нет заказов</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

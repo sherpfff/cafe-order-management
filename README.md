@@ -7,11 +7,6 @@ pip менеджер пакетов Python
 Git для клонирования репозитория
 База данных SQLite встроенная в Python
 
-# Установка зависимостей
-Клонируйте репозиторий с помощью команды:
-git clone https://github.com/your-repository/cafe_order_management.git
-cd cafe_order_management
-
 # Установите зависимости:
 pip install -r requirements.txt
 

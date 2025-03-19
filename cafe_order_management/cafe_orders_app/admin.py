@@ -6,9 +6,11 @@ Created on Tue Mar 11 08:23:11 2025
 """
 from django.contrib import admin
 from django.utils.html import format_html
+from import_export.admin import ImportExportModelAdmin
+from simple_history.admin import SimpleHistoryAdmin
 from .models import Order, Dish
 
-class DishAdmin(admin.ModelAdmin):
+class DishAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, admin.ModelAdmin):
     """
     Настройки административного интерфейса для модели Dish.
     """
@@ -31,7 +33,7 @@ class DishAdmin(admin.ModelAdmin):
         return f"{obj.price:.2f} руб."
 
 @admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
+class OrderAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, admin.ModelAdmin):
     """
     Настройки административного интерфейса для модели Order.
     """
@@ -40,6 +42,7 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ('table_number',)
     readonly_fields = ('total_price',)  # Поле total_price только для чтения
     filter_horizontal = ('dishes',)  # Удобный виджет для выбора блюд
+    actions = ['mark_as_paid']  # Действие для массового изменения статуса
 
     @admin.display(description="Блюда")
     def formatted_dishes(self, obj) -> str:
@@ -58,6 +61,13 @@ class OrderAdmin(admin.ModelAdmin):
         return format_html(
             "<br>".join(f"{dish.name} ({dish.price:.2f} руб.)" for dish in dishes)
         )
+
+    def mark_as_paid(self, request, queryset):
+        """
+        Отмечает выбранные заказы как оплаченные.
+        """
+        queryset.update(status='PAID')
+    mark_as_paid.short_description = "Отметить выбранные заказы как оплаченные"
 
 # Регистрация модели Dish
 admin.site.register(Dish, DishAdmin)
